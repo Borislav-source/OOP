@@ -1,6 +1,7 @@
 class Player:
     skills = {}
     guild = "Unaffiliated"
+
     def __init__(self, name, hp, mp):
         self.name = name
         self.hp = hp
