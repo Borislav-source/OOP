@@ -41,11 +41,12 @@ class Guild:
             return f"Player {player} is in another guild."
 
     def kick_player(self, player):
-        if player not in self.players:
-            return f"Player {player} is not in the guild."
-        self.players.remove(player)
-        Player.guild = 'Unaffiliated'
-        return f"Player {player} has been removed from the guild."
+        for pl in self.players:
+            if pl.name == player:
+                self.players.remove(pl)
+                pl.guild = 'Unaffiliated'
+                return f"Player {player} has been removed from the guild."
+        return f"Player {player.name} is not in the guild."
 
     def guild_info(self):
         data = f"""Guild: {self.name}
@@ -57,7 +58,12 @@ class Guild:
 
 player = Player("George", 50, 100)
 print(player.add_skill("Shield Break", 20))
-print(player.player_info())
-guild = Guild("UGT")
-print(guild.assign_player(player))
-print(guild.guild_info())
+print(player.add_skill("A", 3))
+print(player.add_skill("A", 3))
+# print(player.player_info())
+# guild = Guild("UGT")
+# print(guild.assign_player(player))
+# print(player.add_skill("Shield Break", 20))
+# print(guild.kick_player(player))
+# print(guild.guild_info())
+
