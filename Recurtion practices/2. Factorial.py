@@ -1,12 +1,12 @@
-# def factorial(num):
-#
-#     result = 1
-#     for n in range(num, 0, -1):
-#         result *= n
-#     return result
-#
-#
-# print(factorial(5))
+def factorial(num):
+
+    result = 1
+    for n in range(num, 0, -1):
+        result *= n
+    return result
+
+
+print(factorial(5))
 
 
 # def factorial(num, result=1):
@@ -18,6 +18,17 @@
 #
 #
 # print(factorial(5))
+
+
+def factorial(num):
+    if num == 1:
+        return num
+
+    return num * factorial(num-1)
+    # return result
+
+
+print(factorial(5))
 
 
 def factorial(num):

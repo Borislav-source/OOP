@@ -1,4 +1,4 @@
-def list_sum(lst, the_sum=0, n=0):
+def list_sum(lst, the_sum=0):
 
     for el in lst:
         if not isinstance(el, list):
