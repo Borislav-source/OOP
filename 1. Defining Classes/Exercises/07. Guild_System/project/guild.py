@@ -1,6 +1,5 @@
-
 class Guild:
-    def __init__(self, name):
+    def __init__(self, name: str):
         self.name = name
         self.players = []
 
@@ -12,19 +11,19 @@ class Guild:
             player.guild = self.name
             return f"Welcome player {player.name} to the guild {self.name}"
         else:
-            return f"Player {player} is in another guild."
+            return f"Player {player.name} is in another guild."
 
-    def kick_player(self, player):
-        for pl in self.players:
-            if pl.name == player:
-                self.players.remove(pl)
-                pl.guild = 'Unaffiliated'
-                return f"Player {player} has been removed from the guild."
-        return f"Player {player.name} is not in the guild."
+    def kick_player(self, player_name: str):
+        for player in self.players:
+            if player.name == player_name:
+                self.players.remove(player)
+                player.guild = 'Unaffiliated'
+                return f"Player {player_name} has been removed from the guild."
+        return f"Player {player_name} is not in the guild."
 
     def guild_info(self):
         data = f"""Guild: {self.name}
 """
         for pl in self.players:
-            data += f"{Player.player_info(pl)}\n"
+            data += f"{pl.player_info()}\n"
         return data
