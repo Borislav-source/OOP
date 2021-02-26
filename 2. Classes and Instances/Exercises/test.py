@@ -40,5 +40,22 @@ import math
 # print((10 - 3)**2 + (2 - 5)**2)
 #
 # print(math.sqrt(58))
-a = 23
-print(str(a).zfill(2))
+# a = 23
+# print(str(a).zfill(2))
+
+
+# d = {'gogo': {1: 2}, 'adi': {5: 8}}
+#
+# for key, value in d.items():
+#     if key == 'gogo':
+#         new_key = 'no'
+#         del d[key]
+#         d[new_key] = value
+#
+# print(d)
+
+a = [2, 3, 4]
+print(a[0])
+a.insert(0, 1)
+print(a)
+print(a[0])
