@@ -1,3 +1,5 @@
+from time import *
+from collections import defaultdict
 import math
 # class Exercise:
 #     text = 'Bobby'
@@ -54,8 +56,13 @@ import math
 #
 # print(d)
 
-a = [2, 3, 4]
-print(a[0])
-a.insert(0, 1)
+# a = [2, 3, 4]
+# print(a[0])
+# a.insert(0, 1)
+# print(a)
+# print(a[0])
+
+a = {}
+a['b'] = 2
+
 print(a)
-print(a[0])
