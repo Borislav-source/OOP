@@ -32,6 +32,13 @@ ball.goto(0, 0)
 ball.dx = 0.1
 ball.dy = 0.1
 
+# Todo Pen
+pen = turtle.Turtle()
+pen.speed(0)
+pen.color('white')
+pen.hideturtle()
+pen.goto(0, 260)
+
 
 # Todo Functions for movement
 def paddle_a_up():
@@ -90,17 +97,17 @@ while True:
         ball.dy *= -1
 
     if ball.xcor() > 390:
-        print('Player A is the WINNER!\n'
+        pen.write('Player A is the WINNER!\n'
               'Points:\n'
               f'Player A: {player_a}\n'
-              f'Player B: {player_b}')
+              f'Player B: {player_b}', align="center", font=("Courier", 24, "normal"))
         break
 
     if ball.xcor() < -390:
-        print('Player B is the WINNER!\n'
+        pen.write('Player B is the WINNER!\n'
               'Points:\n'
               f'Player A: {player_a}\n'
-              f'Player B: {player_b}')
+              f'Player B: {player_b}', align="center", font=("Courier", 24, "normal"))
         break
 
     # Todo Collisions with paddles
@@ -110,3 +117,4 @@ while True:
     if ball.xcor() < -370 and (paddle_a.ycor() + 50 > ball.ycor() > paddle_a.ycor() - 50):
         ball.dx *= -1
         player_a += 1
+
