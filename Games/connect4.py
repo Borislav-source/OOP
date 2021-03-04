@@ -61,8 +61,8 @@ def vertical_check(matrix, r, column, piece):
         if matrix[row][column] == piece:
             the_sum += 1
         else:
-            print(f'vertical: {the_sum}')
-            return the_sum == 4
+            break
+    return the_sum == 4
 
 
 def main_diagonal(matrix, r, column, piece):
@@ -71,14 +71,14 @@ def main_diagonal(matrix, r, column, piece):
     # Main diagonal UP-Left
     for row in range(r-1, -1, -1):
         col -= 1
-        if matrix[row][col] == piece:
+        if col in range(COLUMNS_COUNT) and matrix[row][col] == piece:
             the_sum += 1
         else:
             break
     # Main diagonal Down-Right
     for row in range(r+1, len(matrix)):
         column += 1
-        if matrix[row][column] == piece:
+        if column in range(COLUMNS_COUNT) and matrix[row][column] == piece:
             the_sum += 1
         else:
             break
@@ -92,14 +92,14 @@ def opposite_diagonal(matrix, r, column, piece):
     # Opposite diagonal Up-Right
     for row in range(r-1, -1, -1):
         col += 1
-        if matrix[row][col] == piece:
+        if col in range(COLUMNS_COUNT-1) and matrix[row][col] == piece:
             the_sum += 1
         else:
             break
     # Opposite diagonal Down-Left
     for row in range(r+1, len(matrix)):
         column -= 1
-        if matrix[row][column] == piece:
+        if column in range(COLUMNS_COUNT) and matrix[row][column] == piece:
             the_sum += 1
         else:
             break
@@ -125,7 +125,7 @@ def draw_board(matrix):
 
 board = create_board()
 turn = 0
-end_game = False
+game_over = False
 
 pygame.init()
 
@@ -139,16 +139,26 @@ size = (width, height)
 screen = pygame.display.set_mode(size)
 draw_board(board)
 pygame.display.update()
+myfont = pygame.font.SysFont('monospace', 75)
 
 # Todo Play
-while not end_game:
+while not game_over:
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
 
-        if event.type == pygame.MOUSEBUTTONDOWN:
+        if event.type == pygame.MOUSEMOTION:
+            pygame.draw.rect(screen, (0, 0, 0), (0, 0, width, SQUARESIZE))
+            posx = event.pos[0]
+            if turn == 0:
+                pygame.draw.circle(screen, (255, 0, 0), (posx, int(SQUARESIZE/2)), RADIUS)
+            else:
+                pygame.draw.circle(screen, (255, 255, 0), (posx, int(SQUARESIZE / 2)), RADIUS)
+        pygame.display.update()
 
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            pygame.draw.rect(screen, (0, 0, 0), (0, 0, width, SQUARESIZE))
             # Todo Ask player one for move
             if not turn:
                 posx = event.pos[0]
@@ -162,12 +172,15 @@ while not end_game:
                     continue
 
                 if is_winning(board, row, col, 1):
-                    end_game = True
+                    label = myfont.render('Player 1 wins!!!', True, (255, 0, 0))
+                    screen.blit(label, (40, 10))
+                    game_over = True
 
             # Todo Ask player two for move
             else:
                 posx = event.pos[0]
                 col = int(posx // SQUARESIZE)
+                print(col)
 
                 if is_valid(board, col):
                     row = get_the_row(board, col)
@@ -177,9 +190,14 @@ while not end_game:
                     continue
 
                 if is_winning(board, row, col, 2):
-                    end_game = True
+                    label = myfont.render('Player 2 wins!!!', True, (255, 255, 0))
+                    screen.blit(label, (40, 10))
+                    game_over = True
             draw_board(board)
             print(board)
             turn += 1
             turn %= 2
+
+            if game_over:
+                pygame.time.wait(3000)
 
