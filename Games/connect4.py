@@ -2,19 +2,19 @@ import numpy as np
 import pygame
 import sys
 
-ROWS_COUNT = 6
+ROWS_COUNT = 7
 COLUMNS_COUNT = 7
 BLUE = (0, 0, 255)
 
 
 # Todo Create the board
 def create_board():
-    return np.zeros((6, 7))
+    return np.zeros((ROWS_COUNT, COLUMNS_COUNT))
 
 
 # Todo Check and add piece
 def is_valid(matrix, column):
-    return matrix[0][column] == 0
+    return matrix[1][column] == 0
 
 
 def get_the_row(matrix, column):
@@ -109,10 +109,18 @@ def opposite_diagonal(matrix, r, column, piece):
 
 # Todo draw the board
 def draw_board(matrix):
-    for r in range(1, ROWS_COUNT+1):
+    for r in range(1, ROWS_COUNT):
         for c in range(COLUMNS_COUNT):
             pygame.draw.rect(screen, BLUE, (c*SQUARESIZE, r*SQUARESIZE, 100, 100))
-            pygame.draw.circle(screen, (0, 0, 0), (int(c*SQUARESIZE+SQUARESIZE/2), int(r*SQUARESIZE+SQUARESIZE/2)), RADIUS)
+            if matrix[r][c] == 0:
+                pygame.draw.circle(screen, (0, 0, 0), (int(c*SQUARESIZE+SQUARESIZE/2), int(r*SQUARESIZE+SQUARESIZE/2)), RADIUS)
+            elif matrix[r][c] == 1:
+                pygame.draw.circle(screen, (255, 0, 0),
+                                   (int(c * SQUARESIZE + SQUARESIZE / 2), int(r * SQUARESIZE + SQUARESIZE / 2)), RADIUS)
+            elif matrix[r][c] == 2:
+                pygame.draw.circle(screen, (255, 255, 0),
+                                   (int(c * SQUARESIZE + SQUARESIZE / 2), int(r * SQUARESIZE + SQUARESIZE / 2)), RADIUS)
+    pygame.display.update()
 
 
 board = create_board()
@@ -125,7 +133,7 @@ SQUARESIZE = 100
 RADIUS = (SQUARESIZE // 2) - 5
 
 width = COLUMNS_COUNT * SQUARESIZE
-height = (ROWS_COUNT+1) * SQUARESIZE
+height = ROWS_COUNT * SQUARESIZE
 
 size = (width, height)
 screen = pygame.display.set_mode(size)
@@ -136,40 +144,42 @@ pygame.display.update()
 while not end_game:
 
     for event in pygame.event.get():
-        if event == pygame.QUIT:
+        if event.type == pygame.QUIT:
             sys.exit()
 
-        if event == pygame.MOUSEBUTTONDOWN:
-            continue
-            # # Todo Ask player one for move
-            # if not turn:
-            #     col = int(input('Player 1, please choose a column between 0 - 6:'))
-            #
-            #     if is_valid(board, col):
-            #         row = get_the_row(board, col)
-            #         add_piece(board, row, col, 1)
-            #     else:
-            #         print('Sorry! This column is full. Please choose another!')
-            #         continue
-            #
-            #     if is_winning(board, row, col, 1):
-            #         end_game = True
-            #
-            # # Todo Ask player two for move
-            # else:
-            #     col = int(input('Player 2, please choose a column between 0 - 6:'))
-            #
-            #     if is_valid(board, col):
-            #         row = get_the_row(board, col)
-            #         add_piece(board, row, col, 2)
-            #     else:
-            #         print('Sorry! This column is full. Please choose another!')
-            #         continue
-            #
-            #     if is_winning(board, row, col, 2):
-            #         end_game = True
+        if event.type == pygame.MOUSEBUTTONDOWN:
 
-            # print(board)
-            # turn += 1
-            # turn %= 2
+            # Todo Ask player one for move
+            if not turn:
+                posx = event.pos[0]
+                col = int(posx//SQUARESIZE)
+
+                if is_valid(board, col):
+                    row = get_the_row(board, col)
+                    add_piece(board, row, col, 1)
+                else:
+                    print('Sorry! This column is full. Please choose another!')
+                    continue
+
+                if is_winning(board, row, col, 1):
+                    end_game = True
+
+            # Todo Ask player two for move
+            else:
+                posx = event.pos[0]
+                col = int(posx // SQUARESIZE)
+
+                if is_valid(board, col):
+                    row = get_the_row(board, col)
+                    add_piece(board, row, col, 2)
+                else:
+                    print('Sorry! This column is full. Please choose another!')
+                    continue
+
+                if is_winning(board, row, col, 2):
+                    end_game = True
+            draw_board(board)
+            print(board)
+            turn += 1
+            turn %= 2
 
