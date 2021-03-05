@@ -4,6 +4,7 @@ class Cheetah:
         self.gender = gender
         self.age = age
 
+
 animals = [Cheetah("Cheeto", "Male", 2), Cheetah("Cheetia", "Female", 1)]
 for i in range(len(animals)):
     animal = animals[i]
