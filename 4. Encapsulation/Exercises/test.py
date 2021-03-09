@@ -1,5 +1,4 @@
 class Person:
-    __name = str
 
     def __init__(self, name):
         self.__name = name
@@ -18,6 +17,10 @@ class Person:
 
 g = Person('Gogo')
 g.age = 15
+print(g.__dict__)
+g.name = 'Ivan'
+print(g.__dict__)
+print(g.name)
 print(hasattr(Person, "name"))
 print(hasattr(Person, "get_info"))
 print(getattr(g, "age", None))
@@ -25,3 +28,4 @@ setattr(g, "age", 12)
 print(getattr(g, "age", None))
 delattr(g, "age")
 print(hasattr(Person, "age"))
+
