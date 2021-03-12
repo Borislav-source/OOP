@@ -4,38 +4,59 @@ class Account:
         self.amount = amount
         self._transactions = []
 
-    def __getattr__(self, item):
-        return self._transactions
-
-    def __repr__(self):
+    def __str__(self):
         return f'Account of {self.owner} with starting amount: {self.amount}'
 
     def __len__(self):
         return len(self._transactions)
 
-    def repr(self):
+    def __repr__(self):
         return f'Account({self.owner}, {self.amount})'
+
+    # def __iter__(self):
+    #     return iter(self._transactions)
+
+    def __getitem__(self, item):
+        return self._transactions[item]
+
+    def __gt__(self, other):
+        return self.balance > other.balance
+
+    def __ge__(self, other):
+        return self.balance >= other.balance
+
+    def __lt__(self, other):
+        return self.balance < other.balance
+
+    def __le__(self, other):
+        return self.balance <= other.balance
+
+    def __eq__(self, other):
+        return self.balance == other.balance
+
+    def __ne__(self, other):
+        return self.balance != other.balance
+
+    def __add__(self, other):
+        new_account = Account(f'{self.owner}&{other.owner}', self.amount + other.amount)
+        new_account._transactions.extend(self._transactions + other._transactions)
+        return new_account
 
     def add_transaction(self, amount):
         if type(amount) is not int:
             raise ValueError("please use int for amount")
         self._transactions.append(amount)
-        self.amount += amount
 
     @property
     def balance(self):
-        return self.amount
+        return self.amount + sum(self._transactions)
 
-    @property
-    def acc(self):
-        return self._transactions
-
-    def validate_transaction(self, account, amount_to_add: int):
-        if amount_to_add > account.amount:
+    @staticmethod
+    def validate_transaction(account, amount_to_add: int):
+        if account.amount + (amount_to_add + sum(account.balance)) <= 0:
             raise ValueError("sorry cannot go in debt!")
-        self.amount -= amount_to_add
-        self._transactions.append(amount_to_add)
-        return f'New balance: {account.amount}'
+        account._transactions.append(amount_to_add)
+        return f'New balance: {account.balance}'
 
 
 acc = Account('bob', 10)
@@ -47,18 +68,19 @@ acc.add_transaction(-20)
 acc.add_transaction(30)
 print(acc.balance)
 print(len(acc))
-# for transaction in acc:
-#     print(transaction)
-# print(acc[1])
-# print(list(reversed(acc)))
+for transaction in acc:
+    print(transaction)
+print(acc[1])
+print(list(reversed(acc)))
 acc2.add_transaction(10)
 acc2.add_transaction(60)
 print(acc > acc2)
-# print(acc >= acc2)
-# print(acc < acc2)
-# print(acc <= acc2)
-# print(acc == acc2)
-# print(acc != acc2)
-# acc3 = acc + acc2
-# print(acc3)
-# print(acc3._transactions)
+print(acc >= acc2)
+print(acc < acc2)
+print(acc <= acc2)
+print(acc == acc2)
+print(acc != acc2)
+acc3 = acc + acc2
+print(acc3)
+print(acc3._transactions)
+
