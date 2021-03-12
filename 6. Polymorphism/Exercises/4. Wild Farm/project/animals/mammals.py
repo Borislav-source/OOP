@@ -41,5 +41,5 @@ class Tiger(Mammal):
     def feed(self, food):
         if not food.__class__.__name__ == 'Meat':
             return f"{self.__class__.__name__} does not eat {food.__class__.__name__}!"
-        self.weight += food.quantity
+        self.weight += float(food.quantity)
         self.food_eaten += food.quantity

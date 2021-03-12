@@ -53,7 +53,7 @@ class Account:
 
     @staticmethod
     def validate_transaction(account, amount_to_add: int):
-        if account.amount + (amount_to_add + sum(account.balance)) <= 0:
+        if account.amount + amount_to_add <= 0:
             raise ValueError("sorry cannot go in debt!")
         account._transactions.append(amount_to_add)
         return f'New balance: {account.balance}'

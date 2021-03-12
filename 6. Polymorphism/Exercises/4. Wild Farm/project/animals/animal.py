@@ -32,3 +32,4 @@ class Mammal(Animal, ABC):
 
     def __repr__(self):
         return f'{self.__class__.__name__} [{self.name}, {self.weight}, {self.living_region}, {self.food_eaten}]'
+
