@@ -1,11 +1,25 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 
 
-class Worker(ABC):
+class AbstractWorker(ABC):
+
+    @abstractmethod
+    def work(self):
+        pass
+
+
+class Worker(AbstractWorker):
 
     @staticmethod
     def work():
         print("I'm working!!")
+
+
+class SuperWorker(AbstractWorker):
+
+    @staticmethod
+    def work():
+        print("I work very hard!!!")
 
 
 class Manager:
@@ -23,13 +37,6 @@ class Manager:
             self.worker.work()
 
 
-class SuperWorker(Worker):
-
-    @staticmethod
-    def work():
-        print("I work very hard!!!")
-
-
 # worker = Worker()
 # manager = Manager()
 # manager.set_worker(worker)
@@ -41,14 +48,14 @@ class SuperWorker(Worker):
 # except AssertionError:
 #     print("manager fails to support super_worker....")
 
-# worker = Worker()
-# manager = Manager()
-# manager.set_worker(worker)
-# manager.manage()
-#
-# super_worker = SuperWorker()
-# try:
-#     manager.set_worker(super_worker)
-#     manager.manage()
-# except AssertionError:
-#     print("manager fails to support super_worker....")
+worker = Worker()
+manager = Manager()
+manager.set_worker(worker)
+manager.manage()
+
+super_worker = SuperWorker()
+try:
+    manager.set_worker(super_worker)
+    manager.manage()
+except AssertionError:
+    print("manager fails to support super_worker....")
