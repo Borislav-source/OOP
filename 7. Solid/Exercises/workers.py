@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 
 class AbstractWorker(ABC):
 
+    @staticmethod
     @abstractmethod
     def work(self):
         pass
