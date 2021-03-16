@@ -1,5 +1,22 @@
 from abc import ABCMeta, abstractmethod
 
+
+class IContent(object):
+    __metaclass__ = ABCMeta
+
+    @abstractmethod
+    def set_content(self):
+        pass
+
+
+class MyContent(IContent):
+    def __init__(self, content):
+        self.content = content
+
+    def set_content(self):
+        return f"<myML>{self.content}</myML>"
+
+
 class IEmail(object):
     __metaclass__ = ABCMeta
 
@@ -15,11 +32,11 @@ class IEmail(object):
     def set_content(self, content):
         pass
 
+
 class Email(IEmail):
 
-    def __init__(self, protocol, content_type):
+    def __init__(self, protocol):
         self.protocol = protocol
-        self.content_type = content_type
         self.__sender = None
         self.__receiver = None
         self.__content = None
@@ -37,21 +54,24 @@ class Email(IEmail):
             self.__receiver = receiver
 
     def set_content(self, content):
-        if self.content_type == 'MyML':
-            self.__content = '\n'.join(['<myML>', content, '</myML>'])
-        else:
-            self.__content = content
+        self.__content = MyContent.set_content(content)
 
     def __repr__(self):
 
         template = "Sender: {sender}\nReceiver: {receiver}\nContent:\n{content}"
 
-        return template.format(sender = self.__sender, receiver = self.__receiver, content = self.__content)
+        return template.format(sender=self.__sender, receiver=self.__receiver, content=self.__content)
 
 
-email = Email('IM', 'MyML')
+# email = Email('IM', 'MyML')
+# email.set_sender('qmal')
+# email.set_receiver('james')
+# email.set_content('Hello, there!')
+# print(email)
+
+email = Email('IM')
 email.set_sender('qmal')
 email.set_receiver('james')
-email.set_content('Hello, there!')
+content = MyContent('Hello, there!')
+email.set_content(content)
 print(email)
-
