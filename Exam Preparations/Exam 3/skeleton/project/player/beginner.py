@@ -13,5 +13,6 @@ class Beginner(Player):
         if self.damage_is_valid(damage_points):
             raise ValueError("Damage points cannot be less than zero.")
         self.health -= damage_points
-        self.check_if_dead()
+
+
 

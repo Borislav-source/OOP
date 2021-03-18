@@ -16,10 +16,9 @@ class BattleField:
                 card.damage_points += 30
         player_one.health += sum(list(map(lambda x: x.health_ponts, player_one.card_repository.cards)))
         player_two.health += sum(list(map(lambda x: x.health_ponts, player_two.card_repository.cards)))
-        n = 0
-        while True:
-            player_two.take_damage(player_one.card_repository.cards[n])
-            player_one.take_damage(player_two.card_repository.cards[n])
-            if player_one.check_if_dead() or player_two.check_if_dead():
-                return
-            n += 1
+        player_two.take_damage(sum(list(map(lambda x: x.damage_points, player_one.card_repository.cards))))
+        if player_one.is_dead or player_two.is_dead:
+            return
+        player_one.take_damage(sum(list(map(lambda x: x.damage_points, player_two.card_repository.cards))))
+        if player_one.is_dead or player_two.is_dead:
+            return
