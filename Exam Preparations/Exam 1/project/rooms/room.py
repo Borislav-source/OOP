@@ -1,17 +1,14 @@
-from project.appliances.tv import TV
 from project.people.child import Child
-from project.appliances.appliance import Appliance
 
 
 class Room:
-
-    def __init__(self, family_name: str, budget: float, members_count: int):
-        self.family_name = family_name
+    def __init__(self, name: str, budget: float, members_count: int):
+        self.family_name = name
         self.budget = budget
         self.members_count = members_count
+        self.exp = 0
         self.children = []
         self.appliances = []
-        self.exp = 0
 
     @property
     def expenses(self):
@@ -27,8 +24,5 @@ class Room:
                 if isinstance(el, Child):
                     self.exp += el.cost * 30
                 else:
-                    self.exp += el.get_monthly_expenses() * self.members_count
+                    self.exp += el.get_monthly_expense() * self.members_count
         return self.exp
-
-
-

@@ -7,7 +7,6 @@
 #
 # everland = Everland()
 #
-#
 # def test_one():
 #     young_couple = YoungCouple("Johnsons", 150, 205)
 #
