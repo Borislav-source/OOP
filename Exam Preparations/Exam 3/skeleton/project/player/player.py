@@ -31,7 +31,7 @@ class Player(ABC):
 
     @staticmethod
     def damage_is_valid(damage):
-        if damage <= 0:
+        if damage < 0:
             return False
 
     @abstractmethod

@@ -1,4 +1,4 @@
-from project.people.child import Child
+from project.appliances.appliance import Appliance
 
 
 class Room:
@@ -21,7 +21,7 @@ class Room:
     def calculate_expenses(self, *args):
         for lst in args:
             for el in lst:
-                if isinstance(el, Child):
+                if not isinstance(el, Appliance):
                     self.exp += el.cost * 30
                 else:
                     self.exp += el.get_monthly_expense() * self.members_count

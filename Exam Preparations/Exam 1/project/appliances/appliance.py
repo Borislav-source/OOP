@@ -5,4 +5,4 @@ class Appliance:
         self.cost = cost
 
     def get_monthly_expense(self):
-        return self.cost * self.Month
+        return round(self.cost * self.Month, 2)

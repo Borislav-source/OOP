@@ -22,7 +22,7 @@ class Everland:
         result = ''
         for room in self.rooms:
             expenses = room.expenses + room.room_cost
-            if expenses < room.budget:
+            if expenses <= room.budget:
                 result += f"{room.family_name} paid {expenses:.2f}$ and have {room.budget:.2f}$ left.\n"
                 room.budget -= expenses
             else:
@@ -44,5 +44,5 @@ class Everland:
                       f'Budget: {room.budget:.2f}$, Expenses: {room.expenses:.2f}$\n'
             for child in room.children:
                 result += f'--- Child {room.children.index(child)+1} monthly cost: {child.cost*30:.2f}$\n'
-            result += f'--- Appliances monthly cost: {room.expenses - self.calculate_children_costs(room):.2f}$\n'
+            result += f'--- Appliances monthly cost: {(room.expenses - self.calculate_children_costs(room)):.2f}$\n'
         return result
