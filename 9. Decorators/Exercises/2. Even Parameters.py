@@ -7,8 +7,7 @@ def even_parameters(func):
         for el in list(args):
             if not isinstance(el, int) or not el % 2 == 0:
                 return 'Please use only even numbers!'
-        result = func(*args)
-        return result
+        return func(*args)
 
     return decorator
 
