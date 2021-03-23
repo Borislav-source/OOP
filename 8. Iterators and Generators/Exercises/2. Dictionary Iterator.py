@@ -1,3 +1,6 @@
+# Made with Iterator
+
+
 class dictionary_iter:
     def __init__(self, obj):
         self.obj = obj
@@ -17,7 +20,20 @@ class dictionary_iter:
         self.index += 1
         return self.keys[index], self.obj[self.keys[index]]
 
+# Made with Generator
 
-result = dictionary_iter({1: "1", 2: "2"})
-for x in result:
-    print(x)
+
+def dictionary_generator(my_dict):
+    for key in my_dict:
+        yield key, my_dict[key]
+
+
+# result = dictionary_iter({1: "1", 2: "2"})
+# for x in result:
+#     print(x)
+
+
+# result = dictionary_generator({1: "1", 2: "2"})
+# for x in result:
+#     print(x)
+

@@ -1,3 +1,4 @@
+# With Iterator
 class sequence_repeat:
     def __init__(self, sequence, number: int):
         self.sequence = sequence
@@ -16,8 +17,23 @@ class sequence_repeat:
         if self.index == len(self.sequence):
             self.index = 0
         return self.sequence[index]
+#
+#
+# result = sequence_repeat('abcd', 10)
+# for item in result:
+#     print(item, end ='')
+
+# With Generator
+# def sequence_repeat(seq, number):
+#     index = 0
+#     while number > 0:
+#         number -= 1
+#         yield seq[index]
+#         index += 1
+#         if index == len(seq):
+#             index = 0
 
 
-result = sequence_repeat('abc', 5)
-for item in result:
-    print(item, end ='')
+# result = sequence_repeat('abcd', 10)
+# for item in result:
+#     print(item, end ='')
