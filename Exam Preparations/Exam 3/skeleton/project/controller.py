@@ -22,7 +22,7 @@ class Controller:
     def add_player(self, type: str, username: str):
         p_type = self.check_player_type(type)
         player = p_type(username)
-        self.player_repository.add(player)
+        self.player_repository.add_player(player)
         return f"Successfully added player of type {type} with username: {username}"
 
     @staticmethod
