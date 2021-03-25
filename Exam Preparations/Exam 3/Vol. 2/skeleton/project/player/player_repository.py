@@ -2,8 +2,11 @@ class PlayerRepository:
 
     def __init__(self):
         self.players = []
-        self.count = len(self.players)
         self.players_names = []
+
+    @property
+    def count(self):
+        return len(self.players)
 
     def add_player(self, player):
         if player.username in self.players_names:

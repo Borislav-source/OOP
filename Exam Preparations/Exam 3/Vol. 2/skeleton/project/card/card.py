@@ -1,7 +1,8 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 
 
 class Card(ABC):
+    @abstractmethod
     def __init__(self, name, damage_points, health_points):
         self.name = name
         self.damage_points = damage_points

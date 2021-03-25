@@ -3,11 +3,12 @@ from project.player.beginner import Beginner
 
 class BattleField:
 
-    def fight(self, attacker, enemy):
+    @staticmethod
+    def fight(attacker, enemy):
         if attacker.is_dead or enemy.is_dead:
             raise ValueError('Player is dead')
-        self.health_bonus(attacker)
-        self.health_bonus(enemy)
+        BattleField.health_bonus(attacker)
+        BattleField.health_bonus(enemy)
 
         while not attacker.is_dead and not enemy.is_dead:
             enemy.take_damage(attacker.sum_of_damage_points())

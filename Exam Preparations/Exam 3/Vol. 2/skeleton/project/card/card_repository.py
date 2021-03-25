@@ -1,8 +1,11 @@
 class CardRepository:
     def __init__(self):
         self.cards = []
-        self.count = len(self.cards)
         self.cards_names = []
+
+    @property
+    def count(self):
+        return len(self.cards)
 
     def add_card(self, card):
         if card.name in self.cards_names:

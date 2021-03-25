@@ -1,8 +1,9 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 from project.card.card_repository import CardRepository
 
 
 class Player(ABC):
+    @abstractmethod
     def __init__(self, username, health):
         self.username = username
         self.health = health
