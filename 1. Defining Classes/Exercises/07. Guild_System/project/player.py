@@ -14,11 +14,11 @@ class Player:
         return f"Skill {skill_name} added to the collection of the player {self.name}"
 
     def player_info(self):
-        data = f"""Name: {self.name}
-Guild: {self.guild}
-HP: {self.hp}
-MP: {self.mp}
-"""
+        data = f"Name: {self.name}\n"
+        data += f"Guild: {self.guild}\n"
+        data += f"HP: {self.hp}\n"
+        data += f"MP: {self.mp}\n"
+
         for skill in self.skills:
             data += f"==={skill} - {self.skills[skill]}\n"
 

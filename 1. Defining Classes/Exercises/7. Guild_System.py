@@ -1,11 +1,11 @@
 class Player:
-    skills = {}
-    guild = "Unaffiliated"
 
     def __init__(self, name, hp, mp):
         self.name = name
         self.hp = hp
         self.mp = mp
+        self.skills = {}
+        self.guild = "Unaffiliated"
 
     def add_skill(self, skill_name, mana_cost):
         if skill_name in self.skills:
@@ -40,13 +40,13 @@ class Guild:
         else:
             return f"Player {player} is in another guild."
 
-    def kick_player(self, player):
+    def kick_player(self, player_name: str):
         for pl in self.players:
-            if pl.name == player:
+            if pl.name == player_name:
                 self.players.remove(pl)
                 pl.guild = 'Unaffiliated'
-                return f"Player {player} has been removed from the guild."
-        return f"Player {player.name} is not in the guild."
+                return f"Player {player_name} has been removed from the guild."
+        return f"Player {player_name} is not in the guild."
 
     def guild_info(self):
         data = f"""Guild: {self.name}

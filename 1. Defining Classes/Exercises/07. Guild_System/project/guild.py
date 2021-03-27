@@ -22,8 +22,7 @@ class Guild:
         return f"Player {player_name} is not in the guild."
 
     def guild_info(self):
-        data = f"""Guild: {self.name}
-"""
+        data = f"Guild: {self.name}\n"
         for pl in self.players:
             data += f"{pl.player_info()}\n"
         return data
