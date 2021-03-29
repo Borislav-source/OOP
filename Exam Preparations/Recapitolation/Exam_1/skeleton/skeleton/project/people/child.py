@@ -5,5 +5,5 @@ class Child:
         self.cost = self.food_cost + sum(self.toys_cost)
 
     @property
-    def get_monthly_expense(self):
+    def get_monthly_expenses(self):
         return self.cost * 30

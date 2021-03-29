@@ -5,18 +5,22 @@ class Room:
         self.members_count = members_count
         self.children = []
         self.appliances = []
+        self.expenses = 0
 
     @property
     def expenses(self):
-        expenses = self.calculate_expenses(self.children, self.appliances)
-        if expenses < 0:
+        return self.calculate_expenses(self.children, self.appliances)
+
+    @expenses.setter
+    def expenses(self, value):
+        if value < 0:
             raise ValueError("Expenses cannot be negative")
-        return expenses
+        self.__expenses = value
 
     @staticmethod
     def calculate_expenses(*args):
         sum_ = 0
         for lst in args:
             for el in lst:
-                sum_ += el.get_monthly_expense
+                sum_ += el.get_monthly_expenses
         return sum_

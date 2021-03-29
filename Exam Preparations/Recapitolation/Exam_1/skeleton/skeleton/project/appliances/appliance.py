@@ -4,7 +4,9 @@ class Appliance:
     def __init__(self, cost: float):
         self.cost = cost
 
-    @property
     def get_monthly_expense(self):
-        return self.cost * self.Month
+        return round(self.cost * self.Month, 2)
 
+    @property
+    def get_monthly_expenses(self):
+        return round(self.cost * self.Month, 2)
