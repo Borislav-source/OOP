@@ -13,7 +13,7 @@ class Survivor:
     @name.setter
     def name(self, value):
         if not value:
-            raise ValueError("Name is not valid")
+            raise ValueError("Name not valid!")
         self.__name = value
 
     @property
@@ -23,7 +23,7 @@ class Survivor:
     @age.setter
     def age(self, value):
         if value < 0:
-            raise ValueError("Age is not valid")
+            raise ValueError("Age not valid!")
         self.__age = value
 
     @property
@@ -33,7 +33,7 @@ class Survivor:
     @health.setter
     def health(self, value):
         if value < 0:
-            raise ValueError('Health is not valid')
+            raise ValueError('Health not valid!')
         if value > 100:
             value = 100
         self.__health = value
@@ -45,7 +45,7 @@ class Survivor:
     @needs.setter
     def needs(self, value):
         if value < 0:
-            raise ValueError('Needs not valid')
+            raise ValueError('Needs not valid!')
         if value > 100:
             value = 100
         self.__needs = value
@@ -57,3 +57,4 @@ class Survivor:
     @property
     def needs_healing(self):
         return self.health < 100
+

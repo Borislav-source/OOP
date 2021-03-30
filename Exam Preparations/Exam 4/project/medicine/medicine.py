@@ -14,7 +14,7 @@ class Medicine(ABC):
     @health_increase.setter
     def health_increase(self, value):
         if value < 0:
-            raise ValueError('Health increase cannot be less than zero')
+            raise ValueError('Health increase cannot be less than zero.')
         self.__health_increase = value
 
     def apply(self, survivor):
