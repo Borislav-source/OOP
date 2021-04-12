@@ -60,6 +60,7 @@ class System:
         software = System.exist_software(software_name)
         if software and hardware:
             hardware.uninstall(software)
+            System._software.remove(software)
             if software.type == 'Light':
                 hardware.light_softwares.remove(software)
             else:
@@ -97,11 +98,11 @@ class System:
 
     @staticmethod
     def analyze():
-        result = 'System Analysis\n' \
-                  f'Hardware Components: {len(System._hardware)}\n' \
-                  f'Software Components: {len(System._software)}\n' \
-                  f'Total Operational Memory: {System.total_used_memory()} / {System.calculate_memory()}\n' \
-                  f'Total Capacity Taken: {System.total_used_space()} / {System.total_capacity()}'
+        result = f'System Analysis\n'\
+                 f'Hardware Components: {len(System._hardware)}\n' \
+                 f'Software Components: {len(System._software)}\n' \
+                 f'Total Operational Memory: {System.total_used_memory()} / {System.calculate_memory()}\n' \
+                 f'Total Capacity Taken: {System.total_used_space()} / {System.total_capacity()}'
         return result
 
     @staticmethod

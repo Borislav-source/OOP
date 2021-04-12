@@ -29,5 +29,9 @@ class TestHardware(unittest.TestCase):
         self.assertTrue(self.software in self.hardware.software_components)
         self.hardware.uninstall(self.software)
         self.assertTrue(self.software not in self.hardware.software_components)
+        #self.assertNotIn(self.software, self.hardware.software_components)
 
+
+if __name__ == '__main__':
+    unittest.main()
 
