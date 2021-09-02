@@ -27,5 +27,5 @@ print(getattr(g, "age", None))
 setattr(g, "age", 12)
 print(getattr(g, "age", None))
 delattr(g, "age")
-print(hasattr(Person, "age"))
-
+print(hasattr(g, "age"))
+print(getattr(g, "age", None))

@@ -107,4 +107,3 @@ class Zoo:
         for vet in vets:
             result += f'{vet}\n'
         return result.strip()
-
