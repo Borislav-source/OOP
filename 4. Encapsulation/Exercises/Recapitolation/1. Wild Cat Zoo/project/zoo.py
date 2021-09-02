@@ -3,6 +3,7 @@ from tiger import Tiger
 from cheetah import Cheetah
 from keeper import Keeper
 from caretaker import Caretaker
+
 from vet import Vet
 
 
@@ -30,8 +31,14 @@ class Zoo:
             return f'{worker.name} the {worker.__class__.__name__} hired successfully'
         return 'Not enough space for worker'
 
-    def fire_worker(self, worker):
-        if worker in self.workers:
+    def find_worker(self, name: str):
+        for worker in self.workers:
+            if worker.name == name:
+                return worker
+
+    def fire_worker(self, worker_name):
+        worker = self.find_worker(worker_name)
+        if worker:
             self.workers.remove(worker)
             return f'{worker.name} fired successfully'
         return f'There is no {worker.name} in the zoo'
@@ -104,7 +111,6 @@ class Zoo:
                  f'---- {self.__get_count_of_workers("Vet")} Vets:\n' \
                  f'{self.__represent(Vet, self.workers)}'
         return result
-
 
 # z = Zoo('Zoo', 300, 5, 8)
 # leo = Lion('leo', 'male', 5)
